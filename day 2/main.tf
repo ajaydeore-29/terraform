@@ -110,5 +110,14 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_instance" "public_instance" {
+    ami = "ami-01a00762f46d584a1"
+    key_name = "key.pem"
+    instance_type = "t3.micro"
+    tags {
+        Name = "public_instance"
+    }
+}
+
+resource "aws_instance" "private_instance" {
     ami = "
 }

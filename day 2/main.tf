@@ -111,13 +111,35 @@ resource "aws_security_group" "sg" {
 
 resource "aws_instance" "public_instance" {
     ami = "ami-01a00762f46d584a1"
-    key_name = "key.pem"
+    key_name = "key"
     instance_type = "t3.micro"
-    tags {
+    count = 2
+    vpc_security_group_ids = [aws_security_group.sg.id]
+    subnet_id = aws_subnet.public_subnet.id
+    association_public_ip_address = true
+    user_data = file ("/root/terraform-b33/day-2-vpc/user_data.sh")
+
+    root_block_device {
+        volume_sie = "10"
+        volume_type = "gp3"
+
+    }
+
+    tags = {
         Name = "public_instance"
     }
 }
 
 resource "aws_instance" "private_instance" {
-    ami = "
+    ami = "ami-01a00762f46d584a1"
+    key_name = "key"
+    instance_type = t3.micro
+    vpc_security_group_ids = [aws_security_group.sg.id]
+    subnet_id = aws_subnet.private_subnet.id
+    user_data = file("/root/terraform-b33/day-2-vpc/user_data.sh")
+
+    tags = {
+        Nmae = "private_instance"
+    }
 }
+

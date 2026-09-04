@@ -1,5 +1,5 @@
 resource "aws_vpc" "my_vpc" {
-    cidr_block = "10.0.0.0/16"
+    cidr_block = var.vpc_cidr
     tags = {
         Name = "my_vpc"
     }
@@ -7,8 +7,8 @@ resource "aws_vpc" "my_vpc" {
 
 resource "aws_subnet" "public_subnet" {
     vpc_id = aws_vpc.my_vpc.id
-    cidr_block = "10.0.0.0/20"
-    avaibility_zone = "ap_south_1a"
+    cidr_block = var.public_cidr
+    avaibility_zone = var.public_az
     map_public_ip_on_launch = true
     tags = {
         Name = "public_subnet"
@@ -17,8 +17,8 @@ resource "aws_subnet" "public_subnet" {
 
 resource "aws_subnet" "private_subnet" {
     vpc_id = aws_vpc.my_vpc.id
-    cidr_block = "10.0.16.0/20
-    avaibility_zone = "ap_south_1b"
+    cidr_block = var.private_cidr
+    avaibility_zone = var.private_az
     tags = {
         Name = "private_subnet"
     }
@@ -110,9 +110,9 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_instance" "public_instance" {
-    ami = "ami-01a00762f46d584a1"
-    key_name = "key"
-    instance_type = "t3.micro"
+    ami = var.ami
+    key_name = var.key_name
+    instance_type = var.instance_type
     count = 2
     vpc_security_group_ids = [aws_security_group.sg.id]
     subnet_id = aws_subnet.public_subnet.id
@@ -120,8 +120,8 @@ resource "aws_instance" "public_instance" {
     user_data = file ("/root/terraform-b33/day-2-vpc/user_data.sh")
 
     root_block_device {
-        volume_sie = "10"
-        volume_type = "gp3"
+        volume_sie = var.volume_size
+        volume_type = var.volume_type
 
     }
 

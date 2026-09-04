@@ -53,20 +53,16 @@ resource "aws_route_table" "public_rt" {
         gateway_id = aws_internet_gateway.igw.id
        
     }
-     tags = {
-            Name = "public_rt"
-        }
+    
 }
 
 resource "aws_route_table_association" "public_rt_asooc" {
-    subnet_id = asw_subnet.public_subnet.id
+    subnet_id = aws_subnet.public_subnet.id
     route_table_id = aws_route_table.public_rt.id
 }
 
 resource "aws_route_table" "private_rt" {
     vpc_id = aws_vpc.my_vpc.id
-    route {
-        cidr_block = "0.0.0.0/0"
         route {
             cidr_block = "0.0.0.0/0"
             gateway_id = aws_nat_gateway.nat.id
@@ -75,7 +71,7 @@ resource "aws_route_table" "private_rt" {
         tags = {
             Name = "private_rt"
         }
-    }
+    
 }
 
 resource "aws_route_table_association" "private_rt_assoc" {
@@ -94,6 +90,7 @@ resource "aws_security_group" "sg" {
         to_port = 22
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
+    }
     
     ingress {
         from_port = 80
@@ -101,7 +98,7 @@ resource "aws_security_group" "sg" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
-}
+
     egress {
         from_port = 0
         to_port = 0

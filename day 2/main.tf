@@ -50,6 +50,7 @@ resource "aws_route_table" "public_rt" {
 
     route {
         cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.igw.id
         tags = {
             Name = "public_rt"
         }
@@ -65,10 +66,9 @@ resource "aws_route_table" "private_rt" {
     vpc_id = aws_vpc.my_vpc.id
     route {
         cidr_block = "0.0.0.0/0"
-        nat_gateway_id = aws_nat_gateway.nat.id
         route {
             cidr_block = "0.0.0.0/0"
-            nat_gateway_id = aws_nat_gateway.nat.id
+            gateway_id = aws_nat_gateway.nat.id
 
         }   
         tags = {
@@ -95,8 +95,8 @@ resource "aws_security_group" "sg" {
         cidr_blocks = ["0.0.0.0/0"]
     
     ingress {
-        from_port = "80"
-        to_port = "80"
+        from_port = 80
+        to_port = 80
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }

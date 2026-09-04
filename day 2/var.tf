@@ -3,11 +3,11 @@ variable "vpc_cidr" {
 }
 
 variable "public_cidr" {
-    default = "10.0.0.0/20
+    default = "10.0.0.0/20"
 }
 
 variable "public_az" {
-    default = "ap-south-1a
+    default = "ap-south-1a"
 }
 
 variable "private_cidr" {
@@ -30,6 +30,6 @@ variable "volume_size" {
     default = 10
 }
 
-variable "volume_type {
+variable "volume_type" {
     default = "gp3"
 }

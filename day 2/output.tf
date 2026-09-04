@@ -1,5 +1,5 @@
-output "public_ip" {
-    value = aws_instance.public_instance.public_ip
+output "public_ips" {
+  value = aws_instance.public_instance[*].public_ip
 }
 
 output "elastic_ip" {

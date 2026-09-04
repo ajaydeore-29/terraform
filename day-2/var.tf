@@ -19,7 +19,7 @@ variable "private_az" {
 }
 
 variable "ami" {
-    default = "ami-0bea529386a62a2ad"
+    default ="ami-090d68841c2a28756"
 }
 
 variable "key_name" {

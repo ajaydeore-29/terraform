@@ -51,10 +51,11 @@ resource "aws_route_table" "public_rt" {
     route {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_internet_gateway.igw.id
-        tags = {
+       
+    }
+     tags = {
             Name = "public_rt"
         }
-    }
 }
 
 resource "aws_route_table_association" "public_rt_asooc" {
@@ -89,8 +90,8 @@ resource "aws_security_group" "sg" {
     vpc_id = aws_vpc.my_vpc.id
 
     ingress {
-        from_port = "22"
-        to_port = "22"
+        from_port = 22
+        to_port = 22
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     

@@ -8,7 +8,7 @@ resource "aws_vpc" "my_vpc" {
 resource "aws_subnet" "public_subnet" {
     vpc_id = aws_vpc.my_vpc.id
     cidr_block = var.public_cidr
-    avaibility_zone = var.public_az
+    availability_zone = var.public_az
     map_public_ip_on_launch = true
     tags = {
         Name = "public_subnet"
@@ -18,7 +18,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "private_subnet" {
     vpc_id = aws_vpc.my_vpc.id
     cidr_block = var.private_cidr
-    avaibility_zone = var.private_az
+    availability_zone = var.private_az
     tags = {
         Name = "private_subnet"
     }
@@ -33,7 +33,7 @@ resource "aws_internet_gateway" "igw" {
 
 resource "aws_eip" "nat_eip" {
     domain = "vpc"
-    tags {
+    tags = {
         Name = "nat_eip"
     }
 }
@@ -50,7 +50,7 @@ resource "aws_route_table" "public_rt" {
 
     route {
         cidr_block = "0.0.0.0/0"
-        tags {
+        tags = {
             Name = "public_rt"
         }
     }
@@ -92,20 +92,20 @@ resource "aws_security_group" "sg" {
         from_port = "22"
         to_port = "22"
         protocol = "tcp"
-        cidr_block = ["0.0.0.0/0"]
+        cidr_blocks = ["0.0.0.0/0"]
     
     ingress {
         from_port = "80"
         to_port = "80"
         protocol = "tcp"
-        cidr_block = ["0.0.0.0/0"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 }
     egress {
         from_port = 0
         to_port = 0
         protocol = "-1"
-        cidr_block = ["0.0.0.0/0"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 }
 

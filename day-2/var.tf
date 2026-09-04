@@ -23,7 +23,7 @@ variable "ami" {
 }
 
 variable "key_name" {
-    default = "key"
+    default = "keypair"
 }
 
 variable "volume_size" {

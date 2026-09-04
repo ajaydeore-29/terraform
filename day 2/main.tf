@@ -6,7 +6,7 @@ resource "aws_vpc" "my_vpc" {
 }
 
 resource "aws_subnet" "public_subnet" {
-    vpc_id = "aws_vpc.my_vpc.id"
+    vpc_id = aws_vpc.my_vpc.id
     cidr_block = "10.0.0.0/20"
     avaibility_zone = "ap_south_1a"
     map_public_ip_on_launch = true
@@ -16,7 +16,7 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_subnet" "private_subnet" {
-    vpc_id = "aws_vpc.my_vpc.id"
+    vpc_id = aws_vpc.my_vpc.id
     cidr_block = "10.0.16.0/20
     avaibility_zone = "ap_south_1b"
     tags = {
@@ -25,7 +25,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 resource "aws_internet_gateway" "igw" {
-    vpc_id = "aws_vpc.my_vpc.id"
+    vpc_id = aws_vpc.my_vpc.id
     tags = {
         Name = "igw"
     }
@@ -39,33 +39,33 @@ resource "aws_eip" "nat_eip" {
 }
  
 resource "aws_nat_gateway" "nat" {
-    subnet_id = "aws_subnet.public_subnet.id"
+    subnet_id = aws_subnet.public_subnet.id
     allocation_id = "aws_eip.nat_eip.id"
     tags = {
         Name = "nat"
     }
 }
 resource "aws_route_table" "public_rt" {
-    vpc_id = "aws_vpc.my_vpc.id"
+    vpc_id = aws_vpc.my_vpc.id
 
     route {
         cidr_block = "0.0.0.0/0"
         tags {
-            Name = public_rt"
+            Name = "public_rt"
         }
     }
 }
 
 resource "aws_route_table_association" "public_rt_asooc" {
-    subnet_id = "asw_subnet.public_subnet.id"
-    route_table_id = "aws_route_table.public_rt.id"
+    subnet_id = asw_subnet.public_subnet.id
+    route_table_id = aws_route_table.public_rt.id
 }
 
 resource "aws_route_table" "private_rt" {
-    vpc_id = "aws_vpc.my_vpc.id"
+    vpc_id = aws_vpc.my_vpc.id
     route {
         cidr_block = "0.0.0.0/0"
-        nat_gateway_id = "aws_nat_gateway.nat.id"
+        nat_gateway_id = aws_nat_gateway.nat.id
         route {
             cidr_block = "0.0.0.0/0"
             nat_gateway_id = aws_nat_gateway.nat.id
@@ -100,7 +100,7 @@ resource "aws_security_group" "sg" {
         protocol = "tcp"
         cidr_block = ["0.0.0.0/0"]
     }
-
+}
     egress {
         from_port = 0
         to_port = 0
@@ -139,7 +139,7 @@ resource "aws_instance" "private_instance" {
     user_data = file("/root/terraform-b33/day-2-vpc/user_data.sh")
 
     tags = {
-        Nmae = "private_instance"
+        Name = "private_instance"
     }
 }
 

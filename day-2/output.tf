@@ -6,7 +6,3 @@ output "sg_id" {
     value = aws_security_group.sg.id 
 }
 
-output "public_ip" {
-    value = aws_instance.public_instance.public_ip
-}
-

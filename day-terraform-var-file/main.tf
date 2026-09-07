@@ -1,21 +1,21 @@
 module "vpc" {
     source = "./module/vpc"
-    vpc_id = var.vpc_id {}
-    public_subnet = var.public_subnet_id {}
-    private_subnet = var.private_subnet_id {}
-    public_az = var.public_az {}
+    vpc_id = var.vpc_id
+    public_subnet = var.public_subnet_id 
+    private_subnet = var.private_subnet_id
+    public_az = var.public_az 
     private_az = var.private_az
-    ssh_port = var.ssh_port {}
-    http_port = var.http_port {}
-    sg_name = var.sg_name {}
+    ssh_port = var.ssh_port 
+    http_port = var.http_port 
+    sg_name = var.sg_name 
 
     }
 
     module "ec2" {
         source = "./module/ec2"
-        ami = var.ami {}
-        instance_type = var.instance_type {}
-        key_name = var.key_name {}
+        ami = var.ami 
+        instance_type = var.instance_type 
+        key_name = var.key_name 
         sg_id = module.vpc.sg_id 
         public_subnet_id = module.vpc.public_subnet_id
         private_subnet_id = module.vpc.private_subnet_id

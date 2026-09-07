@@ -34,7 +34,7 @@ resource "aws_internet_gateway" {
 resource "aws_eip" "nat_eip" {
     domain = "vpc"
     tags {
-        Name = "nat_eip
+        Name = "nat_eip"
     }
 
 }

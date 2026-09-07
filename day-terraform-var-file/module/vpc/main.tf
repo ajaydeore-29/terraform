@@ -1,6 +1,6 @@
 resource "aws_vpc" "my_vpc" {
     cidr_block = var.vpc_cidr
-    tags {
+    tags = {
         Name = "my_vpc"
     }
 }
@@ -10,7 +10,7 @@ resource "aws_subnet" "public_subnet" {
     cidr_block = var.public_subnet_cidr
     availability_zone = var.public_az
     map_public_on_launch = true
-    tags {
+    tags = {
         Name = "public_subnet"
     }
 }
@@ -19,21 +19,21 @@ resource "aws_subnet" "private_subnet" {
     cidr_block = var.private_subnet_cidr
     availability_zone = var.public_az
     map_public_on_launch = false
-    tags {
+    tags = {
         Name = "private_subnet"
     }
 }
 
 resource "aws_internet_gateway" {
     vpc_id = aws_vpc.my_vpc.id
-    tags {
+    tags = {
         Name = "igw"
     }
 }
 
 resource "aws_eip" "nat_eip" {
     domain = "vpc"
-    tags {
+    tags = {
         Name = "nat_eip"
     }
 

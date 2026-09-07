@@ -5,7 +5,7 @@ resource "aws_instance" "public_instance" {
     subnet_id = var.public_subnet_id
     vpc_security_group_ids = [var.sg_id]
     user_data = file("/root/terraform/day-terraform-var-file/module/ec2/user_data.sh)
-    tags {
+    tags = {
         Name = "public_instance"
     }
     
@@ -18,7 +18,7 @@ resource "aws_instance" "private_instance" {
     subnet_id = var.private_subnet_id
     vpc_security_group_ids = [var.sg_id]
     user_data = file("/root/terraform/day-terraform-var-file/module/ec2/user_data.sh)
-    tags {
+    tags = {
         Name = "private_instance"
     }
     

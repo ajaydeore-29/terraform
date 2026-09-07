@@ -16,8 +16,8 @@ module "vpc" {
         ami = var.ami {}
         instance_type = var.instance_type {}
         key_name = var.key_name {}
-        sg_id = var.sg_id {}
-        public_subnet_id = var.public_subnet_id {}
-        private_subnet_id = var.private_subnet_id {}
+        sg_id = module.vpc.sg_id 
+        public_subnet_id = module.vpc.public_subnet_id
+        private_subnet_id = module.vpc.private_subnet_id
 
     }

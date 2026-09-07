@@ -1,8 +1,8 @@
 module "vpc" {
     source = "./module/vpc"
-    vpc_id = var.vpc_id
-    public_subnet = var.public_subnet_id 
-    private_subnet = var.private_subnet_id
+    vpc_cidr = var.vpc_cidr
+    public_subnet_cidr = var.public_subnet_cidr
+    private_subnet_cidr = var.private_subnet_cidr
     public_az = var.public_az 
     private_az = var.private_az
     ssh_port = var.ssh_port 

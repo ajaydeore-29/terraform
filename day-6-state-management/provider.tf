@@ -6,7 +6,7 @@ provider "aws" {
  terraform {
   backend "s3" {
     bucket =  "my_bkt_aj_1234"
-    region = "ap_south_1"
+    region = "ap-south-1"
     profile = "dev"
     use_lockfile = true 
     key = "terraform.tfstate"

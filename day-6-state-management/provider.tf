@@ -5,7 +5,7 @@ provider "aws" {
 
  terraform {
   backend "s3" {
-    bucket =  "my_bkt_aj_1234"
+    bucket =  "aws-bkt-adhyay-23"
     region = "ap-south-1"
     profile = "dev"
     use_lockfile = true 

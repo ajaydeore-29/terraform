@@ -84,7 +84,7 @@ resource "aws_iam_role_policy_attachment" "node_policies" {
 resource "aws_eks_cluster" "eks_cluster" {
     name = "eks_cluster"
     role_arn = aws_iam_role.cluster_role.arn 
-    Version = "1.36"
+    version = "1.36"
     vpc_config {
         subnet_ids = data.aws_subnets.default.ids
         
@@ -99,7 +99,7 @@ resource "aws_eks_node_group" "node_group" {
   node_group_name = "node_group"
   node_role_arn   = aws_iam_role.node_role.arn
   subnet_ids      = data.aws_subnets.default.ids
-  instance_types = [c7i-flex.large]
+  instance_types = ["c7i-flex.large"]
 
   scaling_config {
     desired_size = 1
